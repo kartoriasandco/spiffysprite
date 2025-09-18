@@ -1,0 +1,25 @@
+plugins {
+    id 'java'
+}
+
+group = 'org.example'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    // https://mvnrepository.com/artifact/com.miglayout/miglayout-core
+    implementation("com.miglayout:miglayout-core:11.4.2")
+    // https://mvnrepository.com/artifact/com.miglayout/miglayout-swing
+    implementation("com.miglayout:miglayout-swing:11.4.2")
+    // https://mvnrepository.com/artifact/com.miglayout/miglayout-ideutil
+    implementation("com.miglayout:miglayout-ideutil:11.2")
+}
+
+test {
+    useJUnitPlatform()
+}
