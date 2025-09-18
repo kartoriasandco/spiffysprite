@@ -1,22 +1,38 @@
 package spiffysprite.ui;
 
+import spiffysprite.utils.ColourUtils;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.color.ColorSpace;
 import java.awt.image.BufferedImage;
 
 public class TransparencyPanel extends JPanel {
     public static final int TRANSPARENCY_BACKGROUND_SQUARE_DIMENSION_PX = 2;
     public static final Color TRANSPARENCY_BACKGROUND_COLOUR_0 = Color.WHITE;
     public static final Color TRANSPARENCY_BACKGROUND_COLOUR_1 = Color.LIGHT_GRAY;
+    private final int widthPx;
+    private final int heightPx;
     private BufferedImage backgroundImage;
     private Color colour;
 
+
     public TransparencyPanel(int widthPx, int heightPx) {
+        this.widthPx = widthPx;
+        this.heightPx = heightPx;
         backgroundImage = new BufferedImage(widthPx, heightPx, BufferedImage.TYPE_4BYTE_ABGR);
         colour = new Color(0.0f, 0.0f, 0.0f, 0.0f);
     }
 
-    public setColour(float h, float s, float b, float a) {
+    /**
+     * Sets the colour of this panel.
+     *
+     * @param h
+     * @param s
+     * @param b
+     * @param a
+     */
+    public void setColour(float h, float s, float b, float a) {
         if (h < 0.0 || h > 1.0) {
             throw new RuntimeException(String.format("Invalid hue: %f", h));
         }
@@ -33,7 +49,21 @@ public class TransparencyPanel extends JPanel {
             throw new RuntimeException(String.format("Invalid alpha: %a", a));
         }
 
-        colour = new Color(h, s, b, a);
+        final float[] hsbComponents = {h, s, b};
+        this.colour = new Color(ColorSpace.getInstance(ColorSpace.TYPE_HSV), hsbComponents, a);
+
+        for (int x = 0; x < widthPx; ++x) {
+            for (int y = 0; y < heightPx; ++y) {
+                final Color transparencyBackgroundColour = ColourUtils.getTransparencyBackgroundColourAt(x, y);
+                final Color combinedColour = ColourUtils.combineColours(
+                        transparencyBackgroundColour,
+                        this.colour,
+                        (float) this.colour.getAlpha() / 255.0f
+                );
+
+                backgroundImage.setRGB(x, y, combinedColour.getRGB());
+            }
+        }
     }
 
     @Override

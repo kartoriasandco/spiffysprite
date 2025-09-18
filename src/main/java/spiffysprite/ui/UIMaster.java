@@ -21,6 +21,8 @@ public class UIMaster extends JFrame {
 
     private void addComponents() {
         this.add(panelMaster);
+
+        panelMaster.add(new TransparencyPanel(100, 100));
     }
 
     private void finaliseComponents() {
