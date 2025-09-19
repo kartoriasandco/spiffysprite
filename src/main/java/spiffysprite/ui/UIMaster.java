@@ -3,6 +3,7 @@ package spiffysprite.ui;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class UIMaster extends JFrame {
     public UIMaster() {
@@ -17,12 +18,14 @@ public class UIMaster extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         panelMaster = new JPanel(new MigLayout());
         spriteGrid = new SpriteGrid();
+
+        panelMaster.setBorder(BorderFactory.createLineBorder(Color.BLACK));
     }
 
     private void addComponents() {
         this.add(panelMaster);
 
-        panelMaster.add(new TransparencyPanel(100, 100));
+        panelMaster.add(spriteGrid, "grow");
     }
 
     private void finaliseComponents() {
