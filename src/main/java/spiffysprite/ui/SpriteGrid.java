@@ -4,6 +4,8 @@ import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class SpriteGrid extends JPanel {
     public static final int SPRITE_SIZE_CELLS = 24;
@@ -25,6 +27,19 @@ public class SpriteGrid extends JPanel {
 
                 this.add(panel, formatString);
             }
+        }
+    }
+
+    private class CellSelectedMouseAdapter extends MouseAdapter {
+        private final TransparencyPanel cell;
+        public CellSelectedMouseAdapter(TransparencyPanel cell) {
+            this.cell = cell;
+        }
+
+        @Override
+        public void mouseClicked(MouseEvent me) {
+            final Color colour = ColourPicker.getActiveColour();
+
         }
     }
 }

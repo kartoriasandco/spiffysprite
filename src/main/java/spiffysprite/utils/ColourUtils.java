@@ -1,5 +1,6 @@
 package spiffysprite.utils;
 
+import spiffysprite.models.HSBAColour;
 import spiffysprite.ui.TransparencyPanel;
 
 import java.awt.*;
@@ -16,7 +17,7 @@ public abstract class ColourUtils {
      * @param ratio   colour mixing ratio; must be in range [0.0, 1.0]
      * @return combination of both colours
      */
-    public static Color combineColours(Color colour0, Color colour1, float ratio) {
+    public static HSBAColour combineColours(HSBAColour colour0, HSBAColour colour1, float ratio) {
         if (ratio < 0.0 || ratio > 1.0) {
             throw new RuntimeException(String.format("Invalid ratio: %f", ratio));
         }
@@ -30,7 +31,7 @@ public abstract class ColourUtils {
         final float combinedHue = (hsbVals0[0] + hsbVals1[0]) / 2.0f;
         final float combinedSaturation = (hsbVals0[1] + hsbVals1[1]) / 2.0f;
         final float combinedBrightness = (hsbVals0[2] + hsbVals1[2]) / 2.0f;
-        return Color.getHSBColor(combinedHue, combinedSaturation, combinedBrightness);
+        return new HSBAColour(combinedHue, combinedSaturation, combinedBrightness);
     }
 
     /**
@@ -41,7 +42,7 @@ public abstract class ColourUtils {
      * @param y y coordinate; must be a positive integer
      * @return colour of the specified point
      */
-    public static Color getTransparencyBackgroundColourAt(int x, int y) {
+    public static HSBAColour getTransparencyBackgroundColourAt(int x, int y) {
         if (x < 0) {
             throw new RuntimeException(String.format("Invalid x: %d", x));
         }
