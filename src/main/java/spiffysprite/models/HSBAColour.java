@@ -24,7 +24,7 @@ public class HSBAColour {
         }
 
         final Color noAlphaColour = new Color(Color.HSBtoRGB(h, s, b));
-        colour = new Color(noAlphaColour.getRed(), noAlphaColour.getGreen(), noAlphaColour.getBlue(), (a * 255));
+        colour = new Color(noAlphaColour.getRed(), noAlphaColour.getGreen(), noAlphaColour.getBlue(), (int) (a * 255));
         hsbaVals[0] = h;
         hsbaVals[1] = s;
         hsbaVals[2] = b;

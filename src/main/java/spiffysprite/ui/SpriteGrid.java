@@ -1,6 +1,7 @@
 package spiffysprite.ui;
 
 import net.miginfocom.swing.MigLayout;
+import spiffysprite.models.HSBAColour;
 
 import javax.swing.*;
 import java.awt.*;
@@ -38,7 +39,7 @@ public class SpriteGrid extends JPanel {
 
         @Override
         public void mouseClicked(MouseEvent me) {
-            final Color colour = ColourPicker.getActiveColour();
+            final HSBAColour colour = ColourPicker.getActiveColour();
 
         }
     }

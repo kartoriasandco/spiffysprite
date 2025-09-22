@@ -6,7 +6,6 @@ import spiffysprite.ui.TransparencyPanel;
 import java.awt.*;
 
 public abstract class ColourUtils {
-
     /**
      * Returns the combination of two colours. Alpha is ignored. Parameter ratio determines the proportions of the two
      * colours in the final colour. A ratio of 0.5 results in an equal proportion of both colours. A ratio of 1.0
@@ -22,12 +21,8 @@ public abstract class ColourUtils {
             throw new RuntimeException(String.format("Invalid ratio: %f", ratio));
         }
 
-        float[] hsbVals0 = new float[3];
-        Color.RGBtoHSB(colour0.getRed(), colour0.getGreen(), colour0.getBlue(), hsbVals0);
-
-        float[] hsbVals1 = new float[3];
-        Color.RGBtoHSB(colour1.getRed(), colour1.getGreen(), colour1.getBlue(), hsbVals1);
-
+        final float[] hsbVals0 = colour0.getHSBAVals();
+        final float[] hsbVals1 = colour1.getHSBAVals();
         final float combinedHue = (hsbVals0[0] + hsbVals1[0]) / 2.0f;
         final float combinedSaturation = (hsbVals0[1] + hsbVals1[1]) / 2.0f;
         final float combinedBrightness = (hsbVals0[2] + hsbVals1[2]) / 2.0f;

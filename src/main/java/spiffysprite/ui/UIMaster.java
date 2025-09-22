@@ -18,6 +18,7 @@ public class UIMaster extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         panelMaster = new JPanel(new MigLayout());
         spriteGrid = new SpriteGrid();
+        colourPicker = new ColourPicker();
 
         panelMaster.setBorder(BorderFactory.createLineBorder(Color.BLACK));
     }
@@ -26,6 +27,7 @@ public class UIMaster extends JFrame {
         this.add(panelMaster);
 
         panelMaster.add(spriteGrid, "grow");
+        panelMaster.add(colourPicker, "grow");
     }
 
     private void finaliseComponents() {
@@ -47,5 +49,6 @@ public class UIMaster extends JFrame {
 
     protected static JPanel panelMaster;
     protected static JTabbedPane tabbedPaneSpriteGrid;
+    protected static ColourPicker colourPicker;
     protected static SpriteGrid spriteGrid;
 }
