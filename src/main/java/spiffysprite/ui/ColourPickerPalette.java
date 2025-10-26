@@ -5,6 +5,8 @@ import spiffysprite.models.HSBAColour;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 
 public class ColourPickerPalette extends JPanel {
@@ -16,6 +18,7 @@ public class ColourPickerPalette extends JPanel {
         super(new MigLayout(String.format("width %d, height %d", WIDTH_PX, HEIGHT_PX)));
         backgroundImage = new BufferedImage(WIDTH_PX + 1, HEIGHT_PX, BufferedImage.TYPE_INT_RGB);
         drawPalette();
+        this.addMouseListener(new PaletteClickedMouseAdapter(this));
     }
 
     private void drawPalette() {
@@ -31,9 +34,28 @@ public class ColourPickerPalette extends JPanel {
         }
     }
 
+    public HSBAColour getColourAt(int x, int y) {
+        return new HSBAColour(backgroundImage.getRGB(x, y));
+    }
+
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.drawImage(backgroundImage, 0, 0, null);
+    }
+
+    private class PaletteClickedMouseAdapter extends MouseAdapter {
+        final ColourPickerPalette palette;
+
+        public PaletteClickedMouseAdapter(ColourPickerPalette palette) {
+            this.palette = palette;
+        }
+
+        @Override
+        public void mouseClicked(MouseEvent me) {
+            System.out.printf("x: %d, y: %d%n", me.getX(), me.getY());
+            HSBAColour selectedColour = palette.getColourAt(me.getX(), me.getY());
+            ColourPicker.setActiveColour(selectedColour);
+        }
     }
 }

@@ -7,24 +7,23 @@ import spiffysprite.utils.ColourUtils;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.color.ColorSpace;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.awt.image.BufferedImage;
 
 public class TransparencyPanel extends JPanel {
     public static final int TRANSPARENCY_BACKGROUND_SQUARE_DIMENSION_PX = 4;
     public static final HSBAColour TRANSPARENCY_BACKGROUND_COLOUR_0 = new HSBAColour(Color.WHITE);
     public static final HSBAColour TRANSPARENCY_BACKGROUND_COLOUR_1 = new HSBAColour(Color.LIGHT_GRAY);
-    private final int widthPx;
-    private final int heightPx;
-    private final BufferedImage backgroundImage;
+    private int widthPx;
+    private int heightPx;
+    private BufferedImage backgroundImage;
     private HSBAColour colour;
 
-
-    public TransparencyPanel(int widthPx, int heightPx) {
-        super(new MigLayout(String.format("width %d, height %d", widthPx, heightPx)));
-        this.widthPx = widthPx;
-        this.heightPx = heightPx;
-        backgroundImage = new BufferedImage(widthPx, heightPx, BufferedImage.TYPE_4BYTE_ABGR);
+    public TransparencyPanel() {
+        super(new MigLayout());
         setColour(new HSBAColour(0.0f, 0.0f, 0.0f, 0.0f));
+        this.addComponentListener(new ComponentResizedListener(this));
     }
 
     /**
@@ -46,6 +45,14 @@ public class TransparencyPanel extends JPanel {
                 backgroundImage.setRGB(x, y, combinedColour.toRGB());
             }
         }
+
+        UIMaster.refreshGraphics();
+    }
+
+    private void renderBackground(int widthPx, int heightPx) {
+        backgroundImage = new BufferedImage(widthPx, heightPx, BufferedImage.TYPE_INT_RGB);
+        setColour(colour);
+        UIMaster.refreshGraphics();
     }
 
     @Override
@@ -57,5 +64,21 @@ public class TransparencyPanel extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.drawImage(backgroundImage, 0, 0, null);
+    }
+
+    class ComponentResizedListener extends ComponentAdapter {
+        JComponent component;
+        public ComponentResizedListener(JComponent component) {
+            this.component = component;
+        }
+
+        @Override
+        public void componentResized(ComponentEvent ce) {
+            super.componentResized(ce);
+            Component c = ce.getComponent();
+            widthPx = c.getWidth();
+            heightPx = c.getHeight();
+            renderBackground(widthPx, heightPx);
+        }
     }
 }

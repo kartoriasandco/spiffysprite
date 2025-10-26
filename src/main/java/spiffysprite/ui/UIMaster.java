@@ -27,7 +27,8 @@ public class UIMaster extends JFrame {
         this.add(panelMaster);
 
         panelMaster.add(spriteGrid, "grow");
-        panelMaster.add(colourPicker, "grow");
+        panelMaster.add(colourPicker, String.format("width %d, height %d", ColourPicker.COLOUR_PALETTE_WIDTH_PX,
+                ColourPicker.COLOUR_PALETTE_HEIGHT_PX));
     }
 
     private void finaliseComponents() {

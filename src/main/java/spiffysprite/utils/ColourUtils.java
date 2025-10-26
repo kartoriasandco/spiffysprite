@@ -9,7 +9,7 @@ public abstract class ColourUtils {
     /**
      * Returns the combination of two colours. Alpha is ignored. Parameter ratio determines the proportions of the two
      * colours in the final colour. A ratio of 0.5 results in an equal proportion of both colours. A ratio of 1.0
-     * results in simply colour0. A ratio of 0.0 results in simply colour1.
+     * simply results in colour1. A ratio of 0.0 simply results in colour0.
      *
      * @param colour0 first colour to combine
      * @param colour1 second colour to combine
@@ -21,11 +21,13 @@ public abstract class ColourUtils {
             throw new RuntimeException(String.format("Invalid ratio: %f", ratio));
         }
 
+        final float colour0Ratio = 1.0f - ratio;
+        final float colour1Ratio = ratio;
         final float[] hsbVals0 = colour0.getHSBAVals();
         final float[] hsbVals1 = colour1.getHSBAVals();
-        final float combinedHue = (hsbVals0[0] + hsbVals1[0]) / 2.0f;
-        final float combinedSaturation = (hsbVals0[1] + hsbVals1[1]) / 2.0f;
-        final float combinedBrightness = (hsbVals0[2] + hsbVals1[2]) / 2.0f;
+        final float combinedHue = (colour0Ratio * hsbVals0[0]) + (colour1Ratio * hsbVals1[0]);
+        final float combinedSaturation = (colour0Ratio * hsbVals0[1]) + (colour1Ratio * hsbVals1[1]);
+        final float combinedBrightness = (colour0Ratio * hsbVals0[2]) + (colour1Ratio * hsbVals1[2]);
         return new HSBAColour(combinedHue, combinedSaturation, combinedBrightness);
     }
 

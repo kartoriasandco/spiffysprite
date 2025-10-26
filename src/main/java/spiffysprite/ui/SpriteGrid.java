@@ -20,7 +20,7 @@ public class SpriteGrid extends JPanel {
     private void initGrid() {
         for (int y = 0; y < SPRITE_SIZE_CELLS; ++y) {
             for (int x = 0; x < SPRITE_SIZE_CELLS; ++x) {
-                var panel = new TransparencyPanel(CELL_SIZE_PX, CELL_SIZE_PX);
+                var panel = new TransparencyPanel();
                 panel.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY));
                 String formatString = (x == (SPRITE_SIZE_CELLS - 1)) ?
                         String.format("width %d, height %d, wrap", CELL_SIZE_PX, CELL_SIZE_PX) :
