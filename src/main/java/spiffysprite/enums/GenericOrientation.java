@@ -2,13 +2,13 @@ package spiffysprite.enums;
 
 import javax.swing.*;
 
-public enum ColourSliderOrientation {
+public enum GenericOrientation {
     HORIZONTAL(SwingConstants.HORIZONTAL),
     VERTICAL(SwingConstants.VERTICAL);
 
     public final int value;
 
-    ColourSliderOrientation(int value) {
+    GenericOrientation(int value) {
         this.value = value;
     }
 }

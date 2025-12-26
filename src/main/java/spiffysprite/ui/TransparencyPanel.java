@@ -6,7 +6,6 @@ import spiffysprite.utils.ColourUtils;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.color.ColorSpace;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.image.BufferedImage;
@@ -21,15 +20,19 @@ public class TransparencyPanel extends JPanel {
     private HSBAColour colour;
 
     public TransparencyPanel() {
+        this(new HSBAColour(0.0f, 0.0f, 0.0f, 0.0f));
+    }
+
+    public TransparencyPanel(HSBAColour colour) {
         super(new MigLayout());
-        setColour(new HSBAColour(0.0f, 0.0f, 0.0f, 0.0f));
+        setColour(colour);
         this.addComponentListener(new ComponentResizedListener(this));
     }
 
     /**
      * Sets the colour of this panel.
      *
-     * @param colour
+     * @param colour background colour
      */
     public void setColour(HSBAColour colour) {
         this.colour = colour;
@@ -39,7 +42,7 @@ public class TransparencyPanel extends JPanel {
                 final HSBAColour combinedColour = ColourUtils.combineColours(
                         transparencyBackgroundColour,
                         colour,
-                        (float) this.colour.getAlpha() / 255.0f
+                        1.0f - this.colour.getAlpha()
                 );
 
                 backgroundImage.setRGB(x, y, combinedColour.toRGB());

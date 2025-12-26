@@ -3,7 +3,9 @@ package spiffysprite.ui;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
+import java.awt.geom.AffineTransform;
 
 public class UIMaster extends JFrame {
     public UIMaster() {
@@ -27,8 +29,7 @@ public class UIMaster extends JFrame {
         this.add(panelMaster);
 
         panelMaster.add(spriteGrid, "grow");
-        panelMaster.add(colourPicker, String.format("width %d, height %d", ColourPicker.COLOUR_PALETTE_WIDTH_PX,
-                ColourPicker.COLOUR_PALETTE_HEIGHT_PX));
+        panelMaster.add(colourPicker, "height 100%");
     }
 
     private void finaliseComponents() {
@@ -39,7 +40,7 @@ public class UIMaster extends JFrame {
     /**
      * Repaints all components within the application. This method can only be called from the Event Dispatch thread.
      */
-    static void refreshGraphics () {
+    public static void refreshGraphics () {
         if (!SwingUtilities.isEventDispatchThread()) {
             throw new RuntimeException("Can only call refreshGraphics from Event Dispatch thread!");
         }

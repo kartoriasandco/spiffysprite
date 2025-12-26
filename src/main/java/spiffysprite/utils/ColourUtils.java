@@ -21,14 +21,12 @@ public abstract class ColourUtils {
             throw new RuntimeException(String.format("Invalid ratio: %f", ratio));
         }
 
-        final float colour0Ratio = 1.0f - ratio;
-        final float colour1Ratio = ratio;
-        final float[] hsbVals0 = colour0.getHSBAVals();
-        final float[] hsbVals1 = colour1.getHSBAVals();
-        final float combinedHue = (colour0Ratio * hsbVals0[0]) + (colour1Ratio * hsbVals1[0]);
-        final float combinedSaturation = (colour0Ratio * hsbVals0[1]) + (colour1Ratio * hsbVals1[1]);
-        final float combinedBrightness = (colour0Ratio * hsbVals0[2]) + (colour1Ratio * hsbVals1[2]);
-        return new HSBAColour(combinedHue, combinedSaturation, combinedBrightness);
+        float colour0Ratio = 1.0f - ratio;
+        float colour1Ratio = ratio;
+        int combinedRed = (int) ((colour1Ratio * colour0.getRed()) + (colour0Ratio * colour1.getRed()));
+        int combinedGreen = (int) ((colour1Ratio * colour0.getGreen()) + (colour0Ratio * colour1.getGreen()));
+        int combinedBlue = (int) ((colour1Ratio * colour0.getBlue()) + (colour0Ratio * colour1.getBlue()));
+        return new HSBAColour(combinedRed, combinedGreen, combinedBlue);
     }
 
     /**

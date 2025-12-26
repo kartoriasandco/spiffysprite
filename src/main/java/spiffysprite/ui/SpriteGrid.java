@@ -7,6 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.geom.AffineTransform;
 
 public class SpriteGrid extends JPanel {
     public static final int SPRITE_SIZE_CELLS = 24;
@@ -21,11 +22,18 @@ public class SpriteGrid extends JPanel {
         for (int y = 0; y < SPRITE_SIZE_CELLS; ++y) {
             for (int x = 0; x < SPRITE_SIZE_CELLS; ++x) {
                 var panel = new TransparencyPanel();
-                panel.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY));
+
+                if (y == 0 && x == 0) {
+                    panel.setBorder(BorderFactory.createLineBorder(Color.RED));
+                } else {
+                    panel.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY));
+                }
+
                 String formatString = (x == (SPRITE_SIZE_CELLS - 1)) ?
                         String.format("width %d, height %d, wrap", CELL_SIZE_PX, CELL_SIZE_PX) :
                         String.format("width %d, height %d", CELL_SIZE_PX, CELL_SIZE_PX);
 
+                panel.addMouseListener(new CellSelectedMouseAdapter(panel));
                 this.add(panel, formatString);
             }
         }
@@ -40,7 +48,8 @@ public class SpriteGrid extends JPanel {
         @Override
         public void mouseClicked(MouseEvent me) {
             final HSBAColour colour = ColourPicker.getActiveColour();
-
+            cell.setColour(colour);
+            UIMaster.refreshGraphics();
         }
     }
 }

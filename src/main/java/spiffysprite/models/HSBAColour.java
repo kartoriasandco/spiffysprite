@@ -93,6 +93,14 @@ public class HSBAColour {
         return hsbaVals;
     }
 
+    public float getHue() { return hsbaVals[0]; }
+
+    public float getSaturation() { return hsbaVals[1]; }
+
+    public float getBrightness() { return hsbaVals[2]; }
+
+    public float getAlpha() { return hsbaVals[3]; }
+
     public int getRed() {
         return colour.getRed();
     }
@@ -103,9 +111,5 @@ public class HSBAColour {
 
     public int getBlue() {
         return colour.getBlue();
-    }
-
-    public int getAlpha() {
-        return colour.getAlpha();
     }
 }
