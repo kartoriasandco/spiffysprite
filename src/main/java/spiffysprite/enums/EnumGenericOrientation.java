@@ -2,13 +2,13 @@ package spiffysprite.enums;
 
 import javax.swing.*;
 
-public enum GenericOrientation {
+public enum EnumGenericOrientation {
     HORIZONTAL(SwingConstants.HORIZONTAL),
     VERTICAL(SwingConstants.VERTICAL);
 
     public final int value;
 
-    GenericOrientation(int value) {
+    EnumGenericOrientation(int value) {
         this.value = value;
     }
 }

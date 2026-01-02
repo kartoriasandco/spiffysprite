@@ -1,9 +1,8 @@
 package spiffysprite.utils;
 
-import spiffysprite.models.HSBAColour;
+import spiffysprite.records.HSBAColour;
+import spiffysprite.records.RGBAColour;
 import spiffysprite.ui.TransparencyPanel;
-
-import java.awt.*;
 
 public abstract class ColourUtils {
     /**
@@ -23,10 +22,13 @@ public abstract class ColourUtils {
 
         float colour0Ratio = 1.0f - ratio;
         float colour1Ratio = ratio;
-        int combinedRed = (int) ((colour1Ratio * colour0.getRed()) + (colour0Ratio * colour1.getRed()));
-        int combinedGreen = (int) ((colour1Ratio * colour0.getGreen()) + (colour0Ratio * colour1.getGreen()));
-        int combinedBlue = (int) ((colour1Ratio * colour0.getBlue()) + (colour0Ratio * colour1.getBlue()));
-        return new HSBAColour(combinedRed, combinedGreen, combinedBlue);
+        RGBAColour rgbaColour0 = HSBAColour.toRGBAColour(colour0);
+        RGBAColour rgbaColour1 = HSBAColour.toRGBAColour(colour1);
+
+        int combinedRed = (int) ((colour1Ratio * rgbaColour0.red()) + (colour0Ratio * rgbaColour1.red()));
+        int combinedGreen = (int) ((colour1Ratio * rgbaColour0.green()) + (colour0Ratio * rgbaColour1.green()));
+        int combinedBlue = (int) ((colour1Ratio * rgbaColour0.blue()) + (colour0Ratio * rgbaColour1.blue()));
+        return RGBAColour.toHSBAColour(new RGBAColour(combinedRed, combinedGreen, combinedBlue, 255));
     }
 
     /**

@@ -1,11 +1,10 @@
 package spiffysprite.ui;
 
 import net.miginfocom.swing.MigLayout;
+import spiffysprite.ui.spritegrid.SpriteGrid;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
-import java.awt.geom.AffineTransform;
 
 public class UIMaster extends JFrame {
     public UIMaster() {

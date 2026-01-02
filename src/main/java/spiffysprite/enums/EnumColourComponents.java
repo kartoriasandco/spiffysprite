@@ -1,6 +1,6 @@
 package spiffysprite.enums;
 
-public enum ColourComponents {
+public enum EnumColourComponents {
     HUE,
     SATURATION,
     BRIGHTNESS,

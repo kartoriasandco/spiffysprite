@@ -1,7 +1,8 @@
 package spiffysprite.ui;
 
 import net.miginfocom.swing.MigLayout;
-import spiffysprite.models.HSBAColour;
+import spiffysprite.records.HSBAColour;
+import spiffysprite.records.RGBAColour;
 import spiffysprite.utils.ColourUtils;
 
 import javax.swing.*;
@@ -12,8 +13,9 @@ import java.awt.image.BufferedImage;
 
 public class TransparencyPanel extends JPanel {
     public static final int TRANSPARENCY_BACKGROUND_SQUARE_DIMENSION_PX = 4;
-    public static final HSBAColour TRANSPARENCY_BACKGROUND_COLOUR_0 = new HSBAColour(Color.WHITE);
-    public static final HSBAColour TRANSPARENCY_BACKGROUND_COLOUR_1 = new HSBAColour(Color.LIGHT_GRAY);
+    public static final HSBAColour TRANSPARENCY_BACKGROUND_COLOUR_0 = HSBAColour.valueOf(Color.WHITE);
+    public static final HSBAColour TRANSPARENCY_BACKGROUND_COLOUR_1 = HSBAColour.valueOf(Color.LIGHT_GRAY);
+    private boolean isSelected = false;
     private int widthPx;
     private int heightPx;
     private BufferedImage backgroundImage;
@@ -29,6 +31,8 @@ public class TransparencyPanel extends JPanel {
         this.addComponentListener(new ComponentResizedListener(this));
     }
 
+    public HSBAColour getColour() { return this.colour; }
+
     /**
      * Sets the colour of this panel.
      *
@@ -42,10 +46,10 @@ public class TransparencyPanel extends JPanel {
                 final HSBAColour combinedColour = ColourUtils.combineColours(
                         transparencyBackgroundColour,
                         colour,
-                        1.0f - this.colour.getAlpha()
+                        1.0f - this.colour.alpha()
                 );
 
-                backgroundImage.setRGB(x, y, combinedColour.toRGB());
+                backgroundImage.setRGB(x, y, HSBAColour.toColor(combinedColour).getRGB());
             }
         }
 
@@ -53,14 +57,9 @@ public class TransparencyPanel extends JPanel {
     }
 
     private void renderBackground(int widthPx, int heightPx) {
-        backgroundImage = new BufferedImage(widthPx, heightPx, BufferedImage.TYPE_INT_RGB);
+        backgroundImage = new BufferedImage(widthPx, heightPx, BufferedImage.TYPE_INT_ARGB);
         setColour(colour);
         UIMaster.refreshGraphics();
-    }
-
-    @Override
-    public void setBackground(Color colour) {
-        this.setColour(new HSBAColour(colour));
     }
 
     @Override
