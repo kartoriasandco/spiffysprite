@@ -1,6 +1,6 @@
 package spiffysprite.ui.palettepanel;
 
-import spiffysprite.records.HSBAColour;
+import spiffysprite.models.EnhancedColour;
 import spiffysprite.ui.ColourPicker;
 import spiffysprite.ui.TransparencyPanel;
 
@@ -17,15 +17,15 @@ public class ListenerMousePaletteCell extends MouseAdapter {
     @Override
     public void mouseClicked(MouseEvent me) {
         TransparencyPanel paletteCell = (TransparencyPanel) me.getSource();
-        HSBAColour colour = paletteCell.getColour();
+        EnhancedColour colour = paletteCell.getColour();
         if (palettePanel.isEditModeEnabled()) {
             palettePanel.selectPaletteCell(paletteCell);
         } else {
             ColourPicker.setActiveColour(colour);
-            ColourPicker.setHue(colour.hue());
-            ColourPicker.setSaturation(colour.saturation());
-            ColourPicker.setBrightness(colour.brightness());
-            ColourPicker.setAlpha(colour.alpha());
+            ColourPicker.setHue(colour.hue);
+            ColourPicker.setSaturation(colour.saturation);
+            ColourPicker.setBrightness(colour.brightness);
+            ColourPicker.setAlpha(colour.alpha);
         }
     }
 }

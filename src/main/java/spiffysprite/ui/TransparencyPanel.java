@@ -1,8 +1,7 @@
 package spiffysprite.ui;
 
 import net.miginfocom.swing.MigLayout;
-import spiffysprite.records.HSBAColour;
-import spiffysprite.records.RGBAColour;
+import spiffysprite.models.EnhancedColour;
 import spiffysprite.utils.ColourUtils;
 
 import javax.swing.*;
@@ -13,43 +12,43 @@ import java.awt.image.BufferedImage;
 
 public class TransparencyPanel extends JPanel {
     public static final int TRANSPARENCY_BACKGROUND_SQUARE_DIMENSION_PX = 4;
-    public static final HSBAColour TRANSPARENCY_BACKGROUND_COLOUR_0 = HSBAColour.valueOf(Color.WHITE);
-    public static final HSBAColour TRANSPARENCY_BACKGROUND_COLOUR_1 = HSBAColour.valueOf(Color.LIGHT_GRAY);
+    public static final EnhancedColour TRANSPARENCY_BACKGROUND_COLOUR_0 = EnhancedColour.valueOf(Color.WHITE);
+    public static final EnhancedColour TRANSPARENCY_BACKGROUND_COLOUR_1 = EnhancedColour.valueOf(Color.LIGHT_GRAY);
     private boolean isSelected = false;
     private int widthPx;
     private int heightPx;
     private BufferedImage backgroundImage;
-    private HSBAColour colour;
+    private EnhancedColour colour;
 
     public TransparencyPanel() {
-        this(new HSBAColour(0.0f, 0.0f, 0.0f, 0.0f));
+        this(new EnhancedColour(0.0f, 0.0f, 0.0f, 0.0f));
     }
 
-    public TransparencyPanel(HSBAColour colour) {
+    public TransparencyPanel(EnhancedColour colour) {
         super(new MigLayout());
         setColour(colour);
         this.addComponentListener(new ComponentResizedListener(this));
     }
 
-    public HSBAColour getColour() { return this.colour; }
+    public EnhancedColour getColour() { return this.colour; }
 
     /**
      * Sets the colour of this panel.
      *
      * @param colour background colour
      */
-    public void setColour(HSBAColour colour) {
+    public void setColour(EnhancedColour colour) {
         this.colour = colour;
         for (int x = 0; x < widthPx; ++x) {
             for (int y = 0; y < heightPx; ++y) {
-                final HSBAColour transparencyBackgroundColour = ColourUtils.getTransparencyBackgroundColourAt(x, y);
-                final HSBAColour combinedColour = ColourUtils.combineColours(
+                final EnhancedColour transparencyBackgroundColour = ColourUtils.getTransparencyBackgroundColourAt(x, y);
+                final EnhancedColour combinedColour = ColourUtils.combineColours(
                         transparencyBackgroundColour,
                         colour,
-                        1.0f - this.colour.alpha()
+                        1.0f - this.colour.alpha
                 );
 
-                backgroundImage.setRGB(x, y, HSBAColour.toColor(combinedColour).getRGB());
+                backgroundImage.setRGB(x, y, EnhancedColour.toColor(combinedColour).getRGB());
             }
         }
 

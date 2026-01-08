@@ -1,6 +1,6 @@
 package spiffysprite.ui.spritegrid;
 
-import spiffysprite.records.HSBAColour;
+import spiffysprite.models.EnhancedColour;
 import spiffysprite.ui.ColourPicker;
 import spiffysprite.ui.TransparencyPanel;
 
@@ -17,7 +17,7 @@ public class ListenerMouseSpriteCell extends MouseAdapter {
     @Override
     public void mousePressed(MouseEvent me) {
         spriteGrid.setMouseButtonPressed(true);
-        HSBAColour activeColour = ColourPicker.getActiveColour();
+        EnhancedColour activeColour = ColourPicker.getActiveColour();
         TransparencyPanel spriteCell = (TransparencyPanel) me.getSource();
         spriteCell.setColour(activeColour);
 
@@ -33,7 +33,7 @@ public class ListenerMouseSpriteCell extends MouseAdapter {
     @Override
     public void mouseEntered(MouseEvent me) {
         if (spriteGrid.isMouseButtonPressed()) {
-            HSBAColour activeColour = ColourPicker.getActiveColour();
+            EnhancedColour activeColour = ColourPicker.getActiveColour();
             TransparencyPanel spriteCell = (TransparencyPanel) me.getSource();
             spriteCell.setColour(activeColour);
         }

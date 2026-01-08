@@ -18,6 +18,7 @@ dependencies {
     implementation("com.miglayout:miglayout-swing:11.4.2")
     // https://mvnrepository.com/artifact/com.miglayout/miglayout-ideutil
     implementation("com.miglayout:miglayout-ideutil:11.2")
+
 }
 
 test {

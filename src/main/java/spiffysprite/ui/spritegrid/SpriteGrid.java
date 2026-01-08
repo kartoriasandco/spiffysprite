@@ -1,7 +1,7 @@
 package spiffysprite.ui.spritegrid;
 
 import net.miginfocom.swing.MigLayout;
-import spiffysprite.records.HSBAColour;
+import spiffysprite.models.EnhancedColour;
 import spiffysprite.ui.ColourPicker;
 import spiffysprite.ui.TransparencyPanel;
 import spiffysprite.ui.UIMaster;
@@ -76,7 +76,7 @@ public class SpriteGrid extends JPanel {
 
         @Override
         public void mouseClicked(MouseEvent me) {
-            final HSBAColour colour = ColourPicker.getActiveColour();
+            final EnhancedColour colour = ColourPicker.getActiveColour();
             cell.setColour(colour);
             UIMaster.refreshGraphics();
         }

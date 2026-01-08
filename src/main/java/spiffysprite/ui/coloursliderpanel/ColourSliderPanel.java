@@ -3,7 +3,7 @@ package spiffysprite.ui.coloursliderpanel;
 import net.miginfocom.swing.MigLayout;
 import spiffysprite.enums.EnumColourComponents;
 import spiffysprite.enums.EnumGenericOrientation;
-import spiffysprite.records.HSBAColour;
+import spiffysprite.models.EnhancedColour;
 import spiffysprite.ui.GradientPanel;
 
 import javax.swing.*;
@@ -16,8 +16,8 @@ public class ColourSliderPanel extends JPanel {
 
     public ColourSliderPanel(
             String labelText,
-            HSBAColour colour0,
-            HSBAColour colour1,
+            EnhancedColour colour0,
+            EnhancedColour colour1,
             EnumColourComponents colourComponent,
             EnumGenericOrientation orientation,
             int minValue,
@@ -50,7 +50,7 @@ public class ColourSliderPanel extends JPanel {
         }
     }
 
-    public void setColours(HSBAColour colour0, HSBAColour colour1) {
+    public void setColours(EnhancedColour colour0, EnhancedColour colour1) {
         gradientPanel.setColours(colour0, colour1);
     }
 }

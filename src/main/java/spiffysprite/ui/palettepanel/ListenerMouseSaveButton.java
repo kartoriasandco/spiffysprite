@@ -1,6 +1,6 @@
 package spiffysprite.ui.palettepanel;
 
-import spiffysprite.records.HSBAColour;
+import spiffysprite.models.EnhancedColour;
 import spiffysprite.ui.ColourPicker;
 
 import javax.swing.*;
@@ -18,7 +18,7 @@ public class ListenerMouseSaveButton extends MouseAdapter {
     public void mouseClicked(MouseEvent me) {
         JButton button = (JButton) me.getSource();
         if (button.isEnabled()) {
-            HSBAColour activeColour = ColourPicker.getActiveColour();
+            EnhancedColour activeColour = ColourPicker.getActiveColour();
             palettePanel.saveActiveColour(activeColour);
         } else {
             me.consume();

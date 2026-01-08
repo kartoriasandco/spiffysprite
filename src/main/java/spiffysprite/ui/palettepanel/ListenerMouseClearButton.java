@@ -17,7 +17,7 @@ public class ListenerMouseClearButton extends MouseAdapter {
     public void mouseClicked(MouseEvent me) {
         if (palettePanel.isEditModeEnabled()) {
             TransparencyPanel selectedCell = palettePanel.getSelectedCell();
-            selectedCell.setColour(EnumDefaultColours.CLEAR.hsbaColour);
+            selectedCell.setColour(EnumDefaultColours.CLEAR.EnhancedColour);
         } else {
             me.consume();
         }

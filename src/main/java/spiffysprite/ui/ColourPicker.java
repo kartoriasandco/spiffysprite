@@ -4,17 +4,16 @@ import net.miginfocom.swing.MigLayout;
 import spiffysprite.enums.EnumColourComponents;
 import spiffysprite.enums.EnumDefaultColours;
 import spiffysprite.enums.EnumGenericOrientation;
-import spiffysprite.records.HSBAColour;
+import spiffysprite.models.EnhancedColour;
 import spiffysprite.ui.coloursliderpanel.ColourSliderPanel;
 import spiffysprite.ui.palettepanel.PalettePanel;
 
 import javax.swing.*;
-import java.awt.*;
 
 public class ColourPicker extends JPanel {
     static final int WIDTH_PX = 256;
     static final int HEIGHT_PX = 50;
-    private static HSBAColour activeColour = EnumDefaultColours.RED.hsbaColour;
+    private static EnhancedColour activeColour = EnumDefaultColours.RED.EnhancedColour;
     private static JLabel labelActiveColour;
     private static TransparencyPanel panelActiveColour;
     private static ColourSliderPanel huePanel;
@@ -33,46 +32,46 @@ public class ColourPicker extends JPanel {
         panelActiveColour = new TransparencyPanel();
         huePanel = new ColourSliderPanel(
                 "Hue",
-                new HSBAColour(0.0f, 1.0f, 1.0f, 1.0f),
-                new HSBAColour(1.0f, 1.0f, 1.0f, 1.0f),
+                new EnhancedColour(0.0f, 1.0f, 1.0f, 1.0f),
+                new EnhancedColour(1.0f, 1.0f, 1.0f, 1.0f),
                 EnumColourComponents.HUE,
                 EnumGenericOrientation.HORIZONTAL,
                 0,
                 255,
-                (int) (activeColour.hue() * 255f)
+                (int) (activeColour.hue * 255f)
         );
 
         saturationPanel = new ColourSliderPanel(
                 "Saturation",
-                new HSBAColour(0.0f, 0.0f, 1.0f, 1.0f),
-                new HSBAColour(0.0f, 1.0f, 1.0f, 1.0f),
+                new EnhancedColour(0.0f, 0.0f, 1.0f, 1.0f),
+                new EnhancedColour(0.0f, 1.0f, 1.0f, 1.0f),
                 EnumColourComponents.SATURATION,
                 EnumGenericOrientation.HORIZONTAL,
                 0,
                 255,
-                (int) (activeColour.saturation() * 255f)
+                (int) (activeColour.saturation * 255f)
         );
 
         brightnessPanel = new ColourSliderPanel(
                 "Brightness",
-                new HSBAColour(0.0f, 1.0f, 0.0f, 1.0f),
-                new HSBAColour(0.0f, 1.0f, 1.0f, 1.0f),
+                new EnhancedColour(0.0f, 1.0f, 0.0f, 1.0f),
+                new EnhancedColour(0.0f, 1.0f, 1.0f, 1.0f),
                 EnumColourComponents.BRIGHTNESS,
                 EnumGenericOrientation.HORIZONTAL,
                 0,
                 255,
-                (int) (activeColour.brightness() * 255f)
+                (int) (activeColour.brightness * 255f)
         );
 
         alphaPanel = new ColourSliderPanel(
                 "Alpha",
-                new HSBAColour(0.0f, 1.0f, 1.0f, 0.0f),
-                new HSBAColour(0.0f, 1.0f, 1.0f, 1.0f),
+                new EnhancedColour(0.0f, 1.0f, 1.0f, 0.0f),
+                new EnhancedColour(0.0f, 1.0f, 1.0f, 1.0f),
                 EnumColourComponents.ALPHA,
                 EnumGenericOrientation.HORIZONTAL,
                 0,
                 255,
-                (int) (activeColour.alpha() * 255f)
+                (int) (activeColour.alpha * 255f)
         );
 
         panelActiveColour.setBorder(BorderFactory.createEtchedBorder());
@@ -88,18 +87,18 @@ public class ColourPicker extends JPanel {
         this.add(palettePanel, String.format("width max(%d)", WIDTH_PX));
     }
 
-    public static HSBAColour getActiveColour() {
+    public static EnhancedColour getActiveColour() {
         return activeColour;
     }
 
-    public static void setActiveColour(HSBAColour colour) {
+    public static void setActiveColour(EnhancedColour colour) {
         activeColour = colour;
         panelActiveColour.setColour(colour);
 
-        setHue(colour.hue());
-        setSaturation(colour.saturation());
-        setBrightness(colour.brightness());
-        setAlpha(colour.alpha());
+        setHue(colour.hue);
+        setSaturation(colour.saturation);
+        setBrightness(colour.brightness);
+        setAlpha(colour.alpha);
     }
 
     public static void setHue(float hue) {
@@ -107,19 +106,19 @@ public class ColourPicker extends JPanel {
             throw new RuntimeException(String.format("Invalid hue: %f", hue));
         }
 
-        activeColour = new HSBAColour(hue, activeColour.saturation(), activeColour.brightness(), activeColour.alpha());
+        activeColour = new EnhancedColour(hue, activeColour.saturation, activeColour.brightness, activeColour.alpha);
         panelActiveColour.setColour(activeColour);
         saturationPanel.setColours(
-                new HSBAColour(activeColour.hue(), 0.0f, 1.0f, 1.0f),
-                new HSBAColour(activeColour.hue(), 1.0f, 1.0f, 1.0f)
+                new EnhancedColour(activeColour.hue, 0.0f, 1.0f, 1.0f),
+                new EnhancedColour(activeColour.hue, 1.0f, 1.0f, 1.0f)
         );
         brightnessPanel.setColours(
-                new HSBAColour(activeColour.hue(), 1.0f, 0.0f, 1.0f),
-                new HSBAColour(activeColour.hue(), 1.0f, 1.0f, 1.0f)
+                new EnhancedColour(activeColour.hue, 1.0f, 0.0f, 1.0f),
+                new EnhancedColour(activeColour.hue, 1.0f, 1.0f, 1.0f)
         );
         alphaPanel.setColours(
-                new HSBAColour(activeColour.hue(), 1.0f, 1.0f, 0.0f),
-                new HSBAColour(activeColour.hue(), 1.0f, 1.0f, 1.0f)
+                new EnhancedColour(activeColour.hue, 1.0f, 1.0f, 0.0f),
+                new EnhancedColour(activeColour.hue, 1.0f, 1.0f, 1.0f)
         );
     }
 
@@ -128,7 +127,7 @@ public class ColourPicker extends JPanel {
             throw new RuntimeException(String.format("Invalid saturation: %f", saturation));
         }
 
-        activeColour = new HSBAColour(activeColour.hue(), saturation, activeColour.brightness(), activeColour.alpha());
+        activeColour = new EnhancedColour(activeColour.hue, saturation, activeColour.brightness, activeColour.alpha);
         panelActiveColour.setColour(activeColour);
     }
 
@@ -137,7 +136,7 @@ public class ColourPicker extends JPanel {
             throw new RuntimeException(String.format("Invalid brightness: %f", brightness));
         }
 
-        activeColour = new HSBAColour(activeColour.hue(), activeColour.saturation(), brightness, activeColour.alpha());
+        activeColour = new EnhancedColour(activeColour.hue, activeColour.saturation, brightness, activeColour.alpha);
         panelActiveColour.setColour(activeColour);
     }
 
@@ -146,7 +145,7 @@ public class ColourPicker extends JPanel {
             throw new RuntimeException(String.format("Invalid alpha: %f", alpha));
         }
 
-        activeColour = new HSBAColour(activeColour.hue(), activeColour.saturation(), activeColour.brightness(), alpha);
+        activeColour = new EnhancedColour(activeColour.hue, activeColour.saturation, activeColour.brightness, alpha);
         panelActiveColour.setColour(activeColour);
     }
 }

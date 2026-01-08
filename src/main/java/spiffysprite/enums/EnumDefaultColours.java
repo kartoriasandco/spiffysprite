@@ -1,25 +1,25 @@
 package spiffysprite.enums;
 
-import spiffysprite.records.HSBAColour;
+import spiffysprite.models.EnhancedColour;
 
 public enum EnumDefaultColours {
-    CLEAR(new HSBAColour(0.0f, 0.0f, 0.0f, 0.0f)),
-    BLACK(new HSBAColour(0.0f, 1.0f, 0.0f, 1.0f)),
-    WHITE(new HSBAColour(0.0f, 0.0f, 1.0f, 1.0f)),
-    LIGHT_GREY(new HSBAColour(0.0f, 0.3f, 0.0f, 1.0f)),
-    DARK_GREY(new HSBAColour(0.0f, 0.7f, 0.0f, 1.0f)),
-    RED(new HSBAColour(0.0f, 1.0f, 1.0f, 1.0f)),
-    ORANGE(new HSBAColour(0.1f, 1.0f, 1.0f, 1.0f)),
-    YELLOW(new HSBAColour(0.16f, 1.0f, 1.0f, 1.0f)),
-    GREEN(new HSBAColour(0.35f, 1.0f, 1.0f, 1.0f)),
-    TEAL(new HSBAColour(0.5f, 1.0f, 0.82f, 1.0f)),
-    BLUE(new HSBAColour(0.66f, 1.0f, 1.0f, 1.0f)),
-    PURPLE(new HSBAColour(0.82f, 1.0f, 1.0f, 1.0f)),
-    PINK(new HSBAColour(0.86f, 0.58f, 1.0f, 1.0f));
+    CLEAR(new EnhancedColour(0.0f, 0.0f, 0.0f, 0.0f)),
+    BLACK(new EnhancedColour(0.0f, 1.0f, 0.0f, 1.0f)),
+    WHITE(new EnhancedColour(0.0f, 0.0f, 1.0f, 1.0f)),
+    LIGHT_GREY(new EnhancedColour(0.0f, 0.3f, 0.0f, 1.0f)),
+    DARK_GREY(new EnhancedColour(0.0f, 0.7f, 0.0f, 1.0f)),
+    RED(new EnhancedColour(0.0f, 1.0f, 1.0f, 1.0f)),
+    ORANGE(new EnhancedColour(0.1f, 1.0f, 1.0f, 1.0f)),
+    YELLOW(new EnhancedColour(0.16f, 1.0f, 1.0f, 1.0f)),
+    GREEN(new EnhancedColour(0.35f, 1.0f, 1.0f, 1.0f)),
+    TEAL(new EnhancedColour(0.5f, 1.0f, 0.82f, 1.0f)),
+    BLUE(new EnhancedColour(0.66f, 1.0f, 1.0f, 1.0f)),
+    PURPLE(new EnhancedColour(0.82f, 1.0f, 1.0f, 1.0f)),
+    PINK(new EnhancedColour(0.86f, 0.58f, 1.0f, 1.0f));
 
-    public final HSBAColour hsbaColour;
+    public final EnhancedColour EnhancedColour;
 
-    EnumDefaultColours(HSBAColour hsbaColour) {
-        this.hsbaColour = hsbaColour;
+    EnumDefaultColours(EnhancedColour EnhancedColour) {
+        this.EnhancedColour = EnhancedColour;
     }
 }

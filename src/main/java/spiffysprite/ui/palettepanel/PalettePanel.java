@@ -1,7 +1,7 @@
 package spiffysprite.ui.palettepanel;
 
 import net.miginfocom.swing.MigLayout;
-import spiffysprite.records.HSBAColour;
+import spiffysprite.models.EnhancedColour;
 import spiffysprite.ui.TransparencyPanel;
 
 import javax.swing.*;
@@ -15,11 +15,11 @@ import static spiffysprite.ui.palettepanel.EnumPalettePanelStrings.*;
 public class PalettePanel extends JPanel {
     private static final int PALETTE_ROWS = 4;
     private static final int PALETTE_COLUMNS = 8;
-    private static final int MAXIMUM_FAVOURITE_COLOURS = PALETTE_COLUMNS * PALETTE_ROWS;
+    public static final int MAXIMUM_PALETTE_COLOURS = PALETTE_COLUMNS * PALETTE_ROWS;
     private static final Dimension FAVOURITE_COLOUR_PANEL_DIMENSION = new Dimension(32, 32);
     private static final Border SELECTED_BORDER = BorderFactory.createBevelBorder(BevelBorder.LOWERED);
     private static final Border DEFAULT_BORDER = BorderFactory.createEtchedBorder();
-    private ArrayList<HSBAColour> paletteColours;
+    private ArrayList<EnhancedColour> paletteColours;
     private ArrayList<TransparencyPanel> paletteColoursPanels;
     private TransparencyPanel selectedCell;
     private JButton buttonClearSelectedCell;
@@ -42,7 +42,7 @@ public class PalettePanel extends JPanel {
 
         for (int i = 0; i < PALETTE_ROWS; ++i) {
             for (int j = 0; j < PALETTE_COLUMNS; ++j) {
-                TransparencyPanel panel = new TransparencyPanel(new HSBAColour(0.0f, 0.0f, 0.0f, 0.0f));
+                TransparencyPanel panel = new TransparencyPanel(new EnhancedColour(0.0f, 0.0f, 0.0f, 0.0f));
                 paletteColoursPanels.add(panel);
                 panel.setBorder(DEFAULT_BORDER);
                 panel.addMouseListener(new ListenerMousePaletteCell(this));
@@ -101,7 +101,7 @@ public class PalettePanel extends JPanel {
         selectedCell = null;
     }
 
-    void saveActiveColour(HSBAColour colour) {
+    void saveActiveColour(EnhancedColour colour) {
         if (isEditModeEnabled) {
             selectedCell.setColour(colour);
         } else {

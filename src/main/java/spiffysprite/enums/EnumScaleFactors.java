@@ -5,9 +5,9 @@ public enum EnumScaleFactors {
     X2(2),
     X4(4);
 
-    public final int scaleFactor;
+    public final int value;
 
-    EnumScaleFactors(int scaleFactor) {
-        this.scaleFactor = scaleFactor;
+    EnumScaleFactors(int value) {
+        this.value = value;
     }
 }
