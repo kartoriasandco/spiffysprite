@@ -41,15 +41,24 @@ public class EnhancedColour extends Color {
             throws IllegalArgumentException {
 
         int rgba = ColourUtils.AHSBToInt(hue, saturation, brightness, alpha);
-        return COLOUR_CACHE.computeIfAbsent(rgba, _ -> new EnhancedColour(hue, saturation, brightness, alpha));
+        return COLOUR_CACHE.computeIfAbsent(rgba, $ -> new EnhancedColour(hue, saturation, brightness, alpha));
     }
 
     public static EnhancedColour fromARGB(int red, int green, int blue, int alpha) throws IllegalArgumentException {
         int rgba = ColourUtils.ARGBToInt(red, green, blue, alpha);
-        return COLOUR_CACHE.computeIfAbsent(rgba, _ -> new EnhancedColour(red, green, blue, alpha));
+        return COLOUR_CACHE.computeIfAbsent(rgba, $ -> new EnhancedColour(red, green, blue, alpha));
     }
 
     public static EnhancedColour fromInt(int val) {
-        ColourUtils.
+        int[] argbVals = ColourUtils.intToARGB(val);
+        return COLOUR_CACHE.computeIfAbsent(
+                val,
+                $ -> new EnhancedColour(
+                    argbVals[0],
+                    argbVals[1],
+                    argbVals[2],
+                    argbVals[3]
+            )
+        );
     }
 }

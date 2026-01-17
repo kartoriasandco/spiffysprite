@@ -26,25 +26,25 @@ public class ListenerChangeSlider implements ChangeListener { ;
         valueTextField.setText(Integer.toString(sliderValue));
 
         EnhancedColour newColour = switch (colourComponent) {
-            case HUE -> new EnhancedColour(
+            case HUE -> EnhancedColour.fromAHSB(
                 colourComponentValue,
                 activeColour.saturation,
                 activeColour.brightness,
                 activeColour.alpha
             );
-            case SATURATION -> new EnhancedColour(
+            case SATURATION -> EnhancedColour.fromAHSB(
                 activeColour.hue,
                 colourComponentValue,
                 activeColour.brightness,
                 activeColour.alpha
             );
-            case BRIGHTNESS -> new EnhancedColour(
+            case BRIGHTNESS -> EnhancedColour.fromAHSB(
                 activeColour.hue,
                 activeColour.saturation,
                 colourComponentValue,
                 activeColour.alpha
             );
-            case ALPHA -> new EnhancedColour(
+            case ALPHA -> EnhancedColour.fromAHSB(
                 activeColour.hue,
                 activeColour.saturation,
                 activeColour.brightness,

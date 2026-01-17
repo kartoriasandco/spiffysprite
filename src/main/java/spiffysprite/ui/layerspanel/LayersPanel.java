@@ -6,6 +6,6 @@ public class LayersPanel extends JPanel {
     private JList layersList;
 
     public LayersPanel() {
-        layersList = new JList()
+        layersList = new JList();
     }
 }

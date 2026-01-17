@@ -28,7 +28,7 @@ public class GradientPanel extends CustomBackgroundPanel {
         switch (orientation) {
             case HORIZONTAL -> {
                 for (int x = 0; x < super.widthPx; ++x) {
-                    EnhancedColour gradientColour = new EnhancedColour(
+                    EnhancedColour gradientColour = EnhancedColour.fromAHSB(
                             colour0.hue + (hueStep * x),
                             colour0.saturation + (saturationStep * x),
                             colour0.brightness + (brightnessStep * x),

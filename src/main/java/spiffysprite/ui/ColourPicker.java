@@ -32,8 +32,8 @@ public class ColourPicker extends JPanel {
         panelActiveColour = new TransparencyPanel();
         huePanel = new ColourSliderPanel(
                 "Hue",
-                new EnhancedColour(0.0f, 1.0f, 1.0f, 1.0f),
-                new EnhancedColour(1.0f, 1.0f, 1.0f, 1.0f),
+                EnhancedColour.fromAHSB(0.0f, 1.0f, 1.0f, 1.0f),
+                EnhancedColour.fromAHSB(1.0f, 1.0f, 1.0f, 1.0f),
                 EnumColourComponents.HUE,
                 EnumGenericOrientation.HORIZONTAL,
                 0,
@@ -43,8 +43,8 @@ public class ColourPicker extends JPanel {
 
         saturationPanel = new ColourSliderPanel(
                 "Saturation",
-                new EnhancedColour(0.0f, 0.0f, 1.0f, 1.0f),
-                new EnhancedColour(0.0f, 1.0f, 1.0f, 1.0f),
+                EnhancedColour.fromAHSB(0.0f, 0.0f, 1.0f, 1.0f),
+                EnhancedColour.fromAHSB(0.0f, 1.0f, 1.0f, 1.0f),
                 EnumColourComponents.SATURATION,
                 EnumGenericOrientation.HORIZONTAL,
                 0,
@@ -54,8 +54,8 @@ public class ColourPicker extends JPanel {
 
         brightnessPanel = new ColourSliderPanel(
                 "Brightness",
-                new EnhancedColour(0.0f, 1.0f, 0.0f, 1.0f),
-                new EnhancedColour(0.0f, 1.0f, 1.0f, 1.0f),
+                EnhancedColour.fromAHSB(0.0f, 1.0f, 0.0f, 1.0f),
+                EnhancedColour.fromAHSB(0.0f, 1.0f, 1.0f, 1.0f),
                 EnumColourComponents.BRIGHTNESS,
                 EnumGenericOrientation.HORIZONTAL,
                 0,
@@ -65,8 +65,8 @@ public class ColourPicker extends JPanel {
 
         alphaPanel = new ColourSliderPanel(
                 "Alpha",
-                new EnhancedColour(0.0f, 1.0f, 1.0f, 0.0f),
-                new EnhancedColour(0.0f, 1.0f, 1.0f, 1.0f),
+                EnhancedColour.fromAHSB(0.0f, 1.0f, 1.0f, 0.0f),
+                EnhancedColour.fromAHSB(0.0f, 1.0f, 1.0f, 1.0f),
                 EnumColourComponents.ALPHA,
                 EnumGenericOrientation.HORIZONTAL,
                 0,
@@ -106,19 +106,19 @@ public class ColourPicker extends JPanel {
             throw new RuntimeException(String.format("Invalid hue: %f", hue));
         }
 
-        activeColour = new EnhancedColour(hue, activeColour.saturation, activeColour.brightness, activeColour.alpha);
+        activeColour = EnhancedColour.fromAHSB(hue, activeColour.saturation, activeColour.brightness, activeColour.alpha);
         panelActiveColour.setColour(activeColour);
         saturationPanel.setColours(
-                new EnhancedColour(activeColour.hue, 0.0f, 1.0f, 1.0f),
-                new EnhancedColour(activeColour.hue, 1.0f, 1.0f, 1.0f)
+                EnhancedColour.fromAHSB(activeColour.hue, 0.0f, 1.0f, 1.0f),
+                EnhancedColour.fromAHSB(activeColour.hue, 1.0f, 1.0f, 1.0f)
         );
         brightnessPanel.setColours(
-                new EnhancedColour(activeColour.hue, 1.0f, 0.0f, 1.0f),
-                new EnhancedColour(activeColour.hue, 1.0f, 1.0f, 1.0f)
+                EnhancedColour.fromAHSB(activeColour.hue, 1.0f, 0.0f, 1.0f),
+                EnhancedColour.fromAHSB(activeColour.hue, 1.0f, 1.0f, 1.0f)
         );
         alphaPanel.setColours(
-                new EnhancedColour(activeColour.hue, 1.0f, 1.0f, 0.0f),
-                new EnhancedColour(activeColour.hue, 1.0f, 1.0f, 1.0f)
+                EnhancedColour.fromAHSB(activeColour.hue, 1.0f, 1.0f, 0.0f),
+                EnhancedColour.fromAHSB(activeColour.hue, 1.0f, 1.0f, 1.0f)
         );
     }
 
@@ -127,7 +127,7 @@ public class ColourPicker extends JPanel {
             throw new RuntimeException(String.format("Invalid saturation: %f", saturation));
         }
 
-        activeColour = new EnhancedColour(activeColour.hue, saturation, activeColour.brightness, activeColour.alpha);
+        activeColour = EnhancedColour.fromAHSB(activeColour.hue, saturation, activeColour.brightness, activeColour.alpha);
         panelActiveColour.setColour(activeColour);
     }
 
@@ -136,7 +136,7 @@ public class ColourPicker extends JPanel {
             throw new RuntimeException(String.format("Invalid brightness: %f", brightness));
         }
 
-        activeColour = new EnhancedColour(activeColour.hue, activeColour.saturation, brightness, activeColour.alpha);
+        activeColour = EnhancedColour.fromAHSB(activeColour.hue, activeColour.saturation, brightness, activeColour.alpha);
         panelActiveColour.setColour(activeColour);
     }
 
@@ -145,7 +145,7 @@ public class ColourPicker extends JPanel {
             throw new RuntimeException(String.format("Invalid alpha: %f", alpha));
         }
 
-        activeColour = new EnhancedColour(activeColour.hue, activeColour.saturation, activeColour.brightness, alpha);
+        activeColour = EnhancedColour.fromAHSB(activeColour.hue, activeColour.saturation, activeColour.brightness, alpha);
         panelActiveColour.setColour(activeColour);
     }
 }

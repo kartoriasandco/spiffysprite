@@ -72,7 +72,25 @@ public abstract class ColourUtils {
         return alpha | red | green | blue;
     }
 
-    public static float[] intToAHSBVals(int intVal) {
-        Color.
+    public static float[] intToAHSB(int intVal) {
+        int[] argbVals = intToARGB(intVal);
+        float[] hsbVals = new float[3];
+        Color.RGBtoHSB(argbVals[0], argbVals[1], argbVals[2], hsbVals);
+
+        return new float[]{
+                hsbVals[0],
+                hsbVals[1],
+                hsbVals[2],
+                (float) a / 255.0f
+        };
+    }
+
+    public static int[] intToARGB(int intVal) {
+        return new int[]{
+                (intVal >> 24) & 0xFF,
+                (intVal >> 16) & 0xFF,
+                (intVal >> 8) & 0xFF,
+                intVal & 0xFF
+        };
     }
 }

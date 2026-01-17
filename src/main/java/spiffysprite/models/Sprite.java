@@ -12,13 +12,26 @@ public class Sprite extends BufferedImage {
         this.scaleFactor = scaleFactor;
     }
 
-    public int getHSBAColourAt(int x, int y) throws IndexOutOfBoundsException {
-        if (x < 0 || x >= getWidth()) {
+    public Sprite(BufferedImage image, EnumScaleFactors scaleFactor) {
+        super(image.getWidth(), image.getHeight(), image.getType());
+        this.scaleFactor = scaleFactor;
+    }
+
+    public EnhancedColour getColourAt(int x, int y) throws IndexOutOfBoundsException {
+        validateCoordinates(this, x, y);
+        return EnhancedColour.fromInt(getRGB(x, y));
+    }
+
+    public void setColourAt(int x, int y, EnhancedColour colour) {
+        validateCoordinates(this, x, y);
+        setRGB(x, y, colour.getRGB());
+    }
+
+    private static void validateCoordinates(Sprite sprite, int x, int y) {
+        if (x < 0 || x >= sprite.getWidth()) {
             throw new IndexOutOfBoundsException("Invalid x: " + x);
-        } else if (y < 0 || y >= getHeight()) {
+        } else if (y < 0 || y >= sprite.getHeight()) {
             throw new IndexOutOfBoundsException("Invalid y: " + y);
         }
-
-        return EnhancedColour.valueOf(getRGB(x, y));
     }
 }
