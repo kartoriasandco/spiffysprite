@@ -1,9 +1,11 @@
 package spiffysprite.enums;
 
 public enum EnumScaleFactors {
-    X1(1),
     X2(2),
-    X4(4);
+    X3(3),
+    X4(4),
+    X5(5),
+    X6(6);
 
     public final int value;
 

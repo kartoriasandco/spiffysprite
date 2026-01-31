@@ -24,7 +24,6 @@ public class GradientPanel extends CustomBackgroundPanel {
         float saturationStep = Math.abs(colour1.saturation - colour0.saturation) / (float) super.widthPx;
         float brightnessStep = Math.abs(colour1.brightness - colour0.brightness) / (float) super.widthPx;
         float alphaStep = Math.abs(colour1.alpha - colour0.alpha) / (float) super.widthPx;
-
         switch (orientation) {
             case HORIZONTAL -> {
                 for (int x = 0; x < super.widthPx; ++x) {
@@ -38,7 +37,7 @@ public class GradientPanel extends CustomBackgroundPanel {
                         EnhancedColour transparencyBackgroundColour = ColourUtils.getTransparencyBackgroundColourAt(x, y);
                         EnhancedColour combinedColour = ColourUtils.combineColours(gradientColour,
                                 transparencyBackgroundColour, gradientColour.alpha);
-                        backgroundImage.setRGB(x, y, EnhancedColour.toColor(combinedColour).getRGB());
+                        backgroundImage.setRGB(x, y, combinedColour.getRGB());
                     }
                 }
             }

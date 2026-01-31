@@ -13,7 +13,7 @@ import javax.swing.*;
 public class ColourPicker extends JPanel {
     static final int WIDTH_PX = 256;
     static final int HEIGHT_PX = 50;
-    private static EnhancedColour activeColour = EnumDefaultColours.RED.EnhancedColour;
+    private static EnhancedColour activeColour = EnumDefaultColours.RED.enhancedColour;
     private static JLabel labelActiveColour;
     private static TransparencyPanel panelActiveColour;
     private static ColourSliderPanel huePanel;
@@ -30,6 +30,17 @@ public class ColourPicker extends JPanel {
     private void initColourPicker() {
         labelActiveColour = new JLabel("Active Colour:");
         panelActiveColour = new TransparencyPanel();
+
+        var colour0 = EnhancedColour.fromAHSB(0.0f, 1.0f, 1.0f, 1.0f);
+        var colour1 = EnhancedColour.fromAHSB(1.0f, 1.0f, 1.0f, 1.0f);
+
+        System.out.printf(
+                "colour0 hue: 0x%s, colour1 hue: 0x%s\n",
+                Integer.toHexString(colour0.getRGB()).toUpperCase().substring(2, 4),
+                Integer.toHexString(colour1.getRGB()).toUpperCase().substring(2, 4)
+        );
+
+
         huePanel = new ColourSliderPanel(
                 "Hue",
                 EnhancedColour.fromAHSB(0.0f, 1.0f, 1.0f, 1.0f),
@@ -38,7 +49,8 @@ public class ColourPicker extends JPanel {
                 EnumGenericOrientation.HORIZONTAL,
                 0,
                 255,
-                (int) (activeColour.hue * 255f)
+                (int) (activeColour.hue * 255f),
+                "HUE"
         );
 
         saturationPanel = new ColourSliderPanel(
@@ -94,7 +106,6 @@ public class ColourPicker extends JPanel {
     public static void setActiveColour(EnhancedColour colour) {
         activeColour = colour;
         panelActiveColour.setColour(colour);
-
         setHue(colour.hue);
         setSaturation(colour.saturation);
         setBrightness(colour.brightness);

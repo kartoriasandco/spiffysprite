@@ -12,8 +12,8 @@ import java.awt.image.BufferedImage;
 
 public class TransparencyPanel extends JPanel {
     public static final int TRANSPARENCY_BACKGROUND_SQUARE_DIMENSION_PX = 4;
-    public static final EnhancedColour TRANSPARENCY_BACKGROUND_COLOUR_0 = EnhancedColour.valueOf(Color.WHITE);
-    public static final EnhancedColour TRANSPARENCY_BACKGROUND_COLOUR_1 = EnhancedColour.valueOf(Color.LIGHT_GRAY);
+    public static final EnhancedColour TRANSPARENCY_BACKGROUND_COLOUR_0 = EnhancedColour.fromColor(Color.WHITE);
+    public static final EnhancedColour TRANSPARENCY_BACKGROUND_COLOUR_1 = EnhancedColour.fromColor(Color.LIGHT_GRAY);
     private boolean isSelected = false;
     private int widthPx;
     private int heightPx;
@@ -21,7 +21,7 @@ public class TransparencyPanel extends JPanel {
     private EnhancedColour colour;
 
     public TransparencyPanel() {
-        this(new EnhancedColour(0.0f, 0.0f, 0.0f, 0.0f));
+        this(EnhancedColour.fromAHSB(0.0f, 0.0f, 0.0f, 0.0f));
     }
 
     public TransparencyPanel(EnhancedColour colour) {
@@ -48,7 +48,7 @@ public class TransparencyPanel extends JPanel {
                         1.0f - this.colour.alpha
                 );
 
-                backgroundImage.setRGB(x, y, EnhancedColour.toColor(combinedColour).getRGB());
+                backgroundImage.setRGB(x, y, combinedColour.getRGB());
             }
         }
 

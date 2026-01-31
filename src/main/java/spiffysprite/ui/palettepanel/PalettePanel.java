@@ -42,7 +42,7 @@ public class PalettePanel extends JPanel {
 
         for (int i = 0; i < PALETTE_ROWS; ++i) {
             for (int j = 0; j < PALETTE_COLUMNS; ++j) {
-                TransparencyPanel panel = new TransparencyPanel(new EnhancedColour(0.0f, 0.0f, 0.0f, 0.0f));
+                TransparencyPanel panel = new TransparencyPanel(EnhancedColour.fromAHSB(0.0f, 0.0f, 0.0f, 0.0f));
                 paletteColoursPanels.add(panel);
                 panel.setBorder(DEFAULT_BORDER);
                 panel.addMouseListener(new ListenerMousePaletteCell(this));

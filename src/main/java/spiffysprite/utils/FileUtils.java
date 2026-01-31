@@ -15,7 +15,7 @@ public abstract class FileUtils {
     public static void saveImage(Sprite sprite, String filePath, String fileName) {
         try {
             File imageFile = new File(filePath, fileName);
-            ImageIO.write(sprite.image(), "png", imageFile);
+            ImageIO.write(sprite, "png", imageFile);
         } catch (IOException ioe) {
             throw new RuntimeException("IOException: " + ioe);
         }

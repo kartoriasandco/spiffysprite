@@ -54,43 +54,70 @@ public abstract class ColourUtils {
                 TransparencyPanel.TRANSPARENCY_BACKGROUND_COLOUR_1;
     }
 
-    public static int[] AHSBToARGB(float hue, float saturation, float brightness, float alpha) {
+    public static int[] HSBAToRGBA(float hue, float saturation, float brightness, float alpha) {
         int rgb = Color.HSBtoRGB(hue, saturation, brightness);
         int r = (rgb >> 16) & 0xFF;
         int g = (rgb >> 8) & 0xFF;
         int b = rgb & 0xFF;
-        int a = (int) (alpha * 255 + 0.5);
+        int a = (int) (alpha * 255);
+
         return new int[] { r, g, b, a };
     }
 
-    public static int AHSBToInt(float hue, float saturation, float brightness, float alpha) {
-        int[] argbVals = AHSBToARGB(hue, saturation, brightness, alpha);
-        return (argbVals[0] << 24) | (argbVals[1] << 16) | (argbVals[2] << 8) | argbVals[3];
-    }
-
-    public static int ARGBToInt(int red, int green, int blue, int alpha) {
-        return alpha | red | green | blue;
-    }
-
-    public static float[] intToAHSB(int intVal) {
-        int[] argbVals = intToARGB(intVal);
+    public static float[] RGBAToHSBA(int red, int green, int blue, int alpha) {
         float[] hsbVals = new float[3];
-        Color.RGBtoHSB(argbVals[0], argbVals[1], argbVals[2], hsbVals);
+        Color.RGBtoHSB(red, green, blue, hsbVals);
+        float h = hsbVals[0];
+        float s = hsbVals[1];
+        float b = hsbVals[2];
+        float a = alpha / 255.0f;
+        return new float[] { h, s, b, a };
+    }
 
+    public static int HSBAToInt(float hue, float saturation, float brightness, float alpha) {
+        int h = (int) (hue * 255);
+        int s = (int) (saturation * 255);
+        int b = (int) (brightness * 255);
+        int a = (int) (alpha * 255);
+        return (a << 24) | (h << 16) | (s << 8) | b;
+    }
+
+    public static int RGBAToInt(int red, int green, int blue, int alpha) {
+        float[] hsbVals = new float[3];
+        Color.RGBtoHSB(red, green, blue, hsbVals);
+        int h = (int) (hsbVals[0] * 255);
+        int s = (int) (hsbVals[1] * 255);
+        int b = (int) (hsbVals[2] * 255);
+        int a = alpha;
+        return (a << 24) | (h << 16) | (s << 8) | b;
+    }
+
+    public static float[] intToHSBA(int intVal) {
         return new float[]{
-                hsbVals[0],
-                hsbVals[1],
-                hsbVals[2],
-                (float) a / 255.0f
+                (intVal >> 16) & 0xFF,
+                (intVal >> 8) & 0xFF,
+                intVal & 0xFF,
+                (intVal >> 24) & 0xFF
         };
     }
 
-    public static int[] intToARGB(int intVal) {
+    public static int[] intToRGBA(int intVal) {
+        int h = (intVal >> 16) & 0xFF;
+        int s = (intVal >> 8) & 0xFF;
+        int b = intVal & 0xFF;
+        int a = (intVal >> 24) & 0xFF;
+
+        Color colour = Color.getHSBColor(
+                h / 255.0f,
+                s / 255.0f,
+                b / 255.0f
+        );
+
         return new int[]{
-                (intVal >> 24) & 0xFF,
-                (intVal >> 16) & 0xFF,
-                (intVal >> 8) & 0xFF,
-                intVal & 0xFF
+                colour.getRed(),
+                colour.getGreen(),
+                colour.getBlue(),
+                a
         };
     }
 }

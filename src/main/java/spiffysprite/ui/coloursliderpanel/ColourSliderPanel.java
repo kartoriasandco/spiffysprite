@@ -24,6 +24,30 @@ public class ColourSliderPanel extends JPanel {
             int maxValue,
             int initialValue
     ) {
+        this(
+                labelText,
+                colour0,
+                colour1,
+                colourComponent,
+                orientation,
+                minValue,
+                maxValue,
+                initialValue,
+                null
+        );
+    }
+
+    public ColourSliderPanel(
+            String labelText,
+            EnhancedColour colour0,
+            EnhancedColour colour1,
+            EnumColourComponents colourComponent,
+            EnumGenericOrientation orientation,
+            int minValue,
+            int maxValue,
+            int initialValue,
+            String tempString
+    ) {
         super(new MigLayout("insets 1px, gapy 2px"));
 
         slider = new JSlider(orientation.value, minValue, maxValue, initialValue);
