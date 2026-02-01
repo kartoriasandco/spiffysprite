@@ -2,6 +2,7 @@ package spiffysprite.ui;
 
 import net.miginfocom.swing.MigLayout;
 import spiffysprite.ui.spritegrid.SpriteGrid;
+import spiffysprite.ui.workspacepanel.WorkspacePanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -20,6 +21,7 @@ public class UIMaster extends JFrame {
         panelMaster = new JPanel(new MigLayout());
         spriteGrid = new SpriteGrid();
         colourPicker = new ColourPicker();
+        workspacePanel = new WorkspacePanel();
 
         panelMaster.setBorder(BorderFactory.createLineBorder(Color.BLACK));
     }
@@ -27,7 +29,8 @@ public class UIMaster extends JFrame {
     private void addComponents() {
         this.add(panelMaster);
 
-        panelMaster.add(spriteGrid, "grow");
+        panelMaster.add(workspacePanel, "width 100%, span 2, wrap");
+        panelMaster.add(spriteGrid, "grow 100");
         panelMaster.add(colourPicker, "height 100%");
     }
 
@@ -52,4 +55,5 @@ public class UIMaster extends JFrame {
     protected static JTabbedPane tabbedPaneSpriteGrid;
     protected static ColourPicker colourPicker;
     protected static SpriteGrid spriteGrid;
+    protected static WorkspacePanel workspacePanel;
 }

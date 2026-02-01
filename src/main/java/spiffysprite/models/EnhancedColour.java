@@ -72,11 +72,10 @@ public class EnhancedColour extends Color {
             throws IllegalArgumentException {
 
         int hsba = ColourUtils.HSBAToInt(hue, saturation, brightness, alpha);
-        EnhancedColour colour = COLOUR_CACHE.computeIfAbsent(
+        return COLOUR_CACHE.computeIfAbsent(
                 "0x" + Integer.toHexString(hsba).toUpperCase(),
                 _ -> new EnhancedColour(hue, saturation, brightness, alpha)
         );
-        return colour;
     }
 
     /**
