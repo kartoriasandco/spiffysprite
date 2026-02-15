@@ -12,12 +12,15 @@ public abstract class FileUtils {
 
     }
 
-    public static void saveImage(Sprite sprite, String filePath, String fileName) {
-        try {
-            File imageFile = new File(filePath, fileName);
-            ImageIO.write(sprite, "png", imageFile);
-        } catch (IOException ioe) {
-            throw new RuntimeException("IOException: " + ioe);
-        }
+    /**
+     * Creates a new .PNG file containing a lossless image of the specified sprite.
+     *
+     * @param sprite sprite to create an image of
+     * @param filePath path to save the .PNG file in
+     * @param fileName name of the .PNG file to create
+     */
+    public static void saveImage(Sprite sprite, String filePath, String fileName) throws IOException, NullPointerException {
+        File imageFile = new File(filePath, fileName);
+        ImageIO.write(sprite, "png", imageFile);
     }
 }

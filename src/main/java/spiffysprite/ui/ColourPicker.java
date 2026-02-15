@@ -23,7 +23,7 @@ public class ColourPicker extends JPanel {
     private static PalettePanel palettePanel;
 
     public ColourPicker() {
-        super(new MigLayout());
+        super(new MigLayout("insets 15"));
         initColourPicker();
     }
 
@@ -33,13 +33,6 @@ public class ColourPicker extends JPanel {
 
         var colour0 = EnhancedColour.fromAHSB(0.0f, 1.0f, 1.0f, 1.0f);
         var colour1 = EnhancedColour.fromAHSB(1.0f, 1.0f, 1.0f, 1.0f);
-
-        System.out.printf(
-                "colour0 hue: 0x%s, colour1 hue: 0x%s\n",
-                Integer.toHexString(colour0.getRGB()).toUpperCase().substring(2, 4),
-                Integer.toHexString(colour1.getRGB()).toUpperCase().substring(2, 4)
-        );
-
 
         huePanel = new ColourSliderPanel(
                 "Hue",

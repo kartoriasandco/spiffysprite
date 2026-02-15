@@ -2,6 +2,7 @@ package spiffysprite.ui.spritegrid;
 
 import net.miginfocom.swing.MigLayout;
 import spiffysprite.models.EnhancedColour;
+import spiffysprite.models.Sprite;
 import spiffysprite.ui.ColourPicker;
 import spiffysprite.ui.TransparencyPanel;
 import spiffysprite.ui.UIMaster;
@@ -16,7 +17,7 @@ public class SpriteGrid extends JPanel {
     public static final int SPRITE_SIZE_CELLS = 24;
     public static final int CELL_SIZE_PX = 24;
     private boolean mouseButtonPressed;
-    private TransparencyPanel[][] gridCells;
+    private static TransparencyPanel[][] gridCells;
 
     public SpriteGrid() {
         super(new MigLayout("insets 0, gapx 0, gapy 0"));
@@ -57,7 +58,12 @@ public class SpriteGrid extends JPanel {
         this.mouseButtonPressed = mouseButtonPressed;
     }
 
-    BufferedImage toBufferedImage() {
+    /**
+     * Creates a Sprite object from the pixel grid.
+     *
+     * @return Sprite representation of the grid
+     */
+    public static Sprite toSprite() {
         BufferedImage image = new BufferedImage(SPRITE_SIZE_CELLS, SPRITE_SIZE_CELLS, BufferedImage.TYPE_INT_ARGB);
         for (int x = 0; x < SPRITE_SIZE_CELLS; ++x) {
             for (int y = 0; y < SPRITE_SIZE_CELLS; ++y) {
@@ -65,7 +71,7 @@ public class SpriteGrid extends JPanel {
             }
         }
 
-        return image;
+        return Sprite.fromBufferedImage(image);
     }
 
     private class CellSelectedMouseAdapter extends MouseAdapter {
