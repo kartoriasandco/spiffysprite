@@ -1,6 +1,9 @@
 package spiffysprite;
 
 import spiffysprite.ui.UIMaster;
+import spiffysprite.utils.jsonparser.JSONArray;
+import spiffysprite.utils.jsonparser.JSONValue;
+import spiffysprite.utils.jsonparser.JSONObject;
 
 import javax.swing.*;
 

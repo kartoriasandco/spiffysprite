@@ -8,7 +8,7 @@ import java.awt.*;
 import java.util.Arrays;
 
 public abstract class ErrorUtils {
-    public static void handleException(Exception e) {
+    public static void displayException(Exception e) {
         StackTraceElement[] stackTrace = e.getStackTrace();
         StringBuilder sb = new StringBuilder();
         Arrays.stream(stackTrace).forEach((elem) -> sb.append(elem).append("\n"));

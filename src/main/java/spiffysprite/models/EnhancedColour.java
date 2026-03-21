@@ -108,7 +108,7 @@ public class EnhancedColour extends Color {
     public static EnhancedColour fromInt(int val) throws IllegalArgumentException {
         int[] argbVals = ColourUtils.intToRGBA(val);
         String key = "0x" + Integer.toHexString(val).toUpperCase();
-        System.out.println("fromInt key: " + key);
+
         return COLOUR_CACHE.computeIfAbsent(
                 "0x" + Integer.toHexString(val).toUpperCase(),
                 _ -> new EnhancedColour(
@@ -129,6 +129,8 @@ public class EnhancedColour extends Color {
     public static EnhancedColour fromColor(Color colour) {
         return fromARGB(colour.getRed(), colour.getGreen(), colour.getBlue(), colour.getAlpha());
     }
+
+
 
     @Override
     public String toString() {

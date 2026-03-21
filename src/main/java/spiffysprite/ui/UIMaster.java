@@ -45,15 +45,13 @@ public class UIMaster extends JFrame {
     }
 
     /**
-     * Repaints all components within the application. This method can only be called from the Event Dispatch thread.
+     * Repaints all components within the application.
      */
     public static void refreshGraphics () {
-        if (!SwingUtilities.isEventDispatchThread()) {
-            throw new RuntimeException("Can only call refreshGraphics from Event Dispatch thread!");
-        }
-
-        panelMaster.repaint();
-        panelMaster.validate();
+        SwingUtilities.invokeLater(() -> {
+            panelMaster.repaint();
+            panelMaster.validate();
+        });
     }
 
     protected static JPanel panelMaster;

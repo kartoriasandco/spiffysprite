@@ -1,18 +1,42 @@
 package spiffysprite.models;
 
 import spiffysprite.enums.EnumScaleFactors;
+import spiffysprite.utils.jsonparser.JSONArray;
+import spiffysprite.utils.jsonparser.JSONObject;
+import spiffysprite.utils.jsonparser.JSONValue;
 
 import java.awt.image.BufferedImage;
 
 public class Sprite extends BufferedImage {
+    private final int heightPx, widthPx;
+    private String name = "";
+
     public Sprite(int widthPx, int heightPx) {
+        this.heightPx = heightPx;
+        this.widthPx = widthPx;
         super(widthPx, heightPx, BufferedImage.TYPE_INT_ARGB);
     }
 
     private Sprite(BufferedImage image) {
-        super(image.getWidth(), image.getHeight(), image.getType());
+        heightPx = image.getHeight();
+        widthPx = image.getWidth();
+
+        super(
+            image.getColorModel(),
+            image.copyData(null),
+            image.isAlphaPremultiplied(),
+            null
+        );
     }
 
+    /**
+     * Returns the colour at the specified coordinates in this sprite.
+     *
+     * @param x x-coordinate to get
+     * @param y y-coordinate to get
+     * @return EnhancedColour of the cell at coordinate (x, y)
+     * @throws IndexOutOfBoundsException when (x, y) is an invalid coordinate for this sprite
+     */
     public EnhancedColour getColourAt(int x, int y) throws IndexOutOfBoundsException {
         validateCoordinates(x, y);
         return EnhancedColour.fromInt(getRGB(x, y));
@@ -22,6 +46,9 @@ public class Sprite extends BufferedImage {
         validateCoordinates(x, y);
         setRGB(x, y, colour.getRGB());
     }
+
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
 
     /**
      * Factory method that creates a new sprite that contains a copy of the specified image.
@@ -42,7 +69,7 @@ public class Sprite extends BufferedImage {
                 image.getHeight()
         );
 
-        return new Sprite(image);
+        return new Sprite(newImage);
     }
 
     /**
@@ -53,9 +80,9 @@ public class Sprite extends BufferedImage {
      * @throws RuntimeException if x or y coordinates are out of bounds
      */
     private void validateCoordinates(int x, int y) throws RuntimeException {
-        if (x < 0 || x >= getWidth()) {
+        if (x < 0 || x >= widthPx) {
             throw new IndexOutOfBoundsException("Invalid x: " + x);
-        } else if (y < 0 || y >= getHeight()) {
+        } else if (y < 0 || y >= heightPx) {
             throw new IndexOutOfBoundsException("Invalid y: " + y);
         }
     }

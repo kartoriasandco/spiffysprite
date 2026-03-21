@@ -13,7 +13,8 @@ public class WorkspacePanel extends JPanel {
     private static JTextField filePathTextField;
     private static JTextField fileNameTextField;
     private static JButton browseButton;
-    private static JButton saveButton;
+    private static JButton exportImageButton;
+    private static JButton saveDataButton;
 
     public WorkspacePanel() {
         super(new MigLayout("fillx", "[][][grow, fill]1px[150px, fill]", ""));
@@ -22,27 +23,34 @@ public class WorkspacePanel extends JPanel {
     }
 
     private void initComponents() {
+        panelButtons = new JPanel(new MigLayout());
+        panelTextFields = new JPanel(new MigLayout());
         filePathTextField = new JTextField();
         fileNameTextField = new JTextField();
         browseButton = new JButton("Browse for Workspace");
-        saveButton = new JButton("Save Sprite");
+        exportImageButton = new JButton("Export as PNG");
+        saveDataButton = new JButton("Save Sprite");
 
         this.setBorder(BorderFactory.createTitledBorder("Workspace"));
         filePathTextField.setEditable(false);
         filePathTextField.setHorizontalAlignment(SwingConstants.RIGHT);
+        fileNameTextField.getDocument().addDocumentListener(new DocumentListenerFileName());
         browseButton.addMouseListener(new ListenerMouseBrowseButton());
-        saveButton.addMouseListener(new ListenerMouseSaveButton());
+        exportImageButton.addMouseListener(new ListenerMouseExportButton());
+        saveDataButton.addMouseListener(new ListenerMouseSaveButton());
     }
 
     private void addComponents() {
-        this.add(browseButton);
-        this.add(saveButton);
-        this.add(filePathTextField, "height 27px");
-        this.add(fileNameTextField, "height 27px");
+        this.add(panelButtons);
+        this.add(panelTextFields);
+        panelButtons.add(browseButton, "span 2, wrap");
+        panelButtons.add(exportImageButton);
+        panelButtons.add(saveDataButton);
+        panelTextFields.add(filePathTextField, "height 27px");
+        panelTextFields.add(fileNameTextField, "height 27px");
     }
 
     static void setWorkspaceFilePath(String filePath) {
-        System.out.println(SwingUtilities.isEventDispatchThread());
         workspaceFilePath = filePath;
         filePathTextField.setText(workspaceFilePath + "/");
         UIMaster.refreshGraphics();
@@ -53,4 +61,6 @@ public class WorkspacePanel extends JPanel {
     }
 
     public static String getFileName() { return fileName; }
+
+    public static void setFileName(String newFileName) { fileName = newFileName; }
 }
