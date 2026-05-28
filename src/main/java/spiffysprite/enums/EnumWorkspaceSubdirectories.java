@@ -1,7 +1,9 @@
 package spiffysprite.enums;
 
 public enum EnumWorkspaceSubdirectories {
-    SPRITES("/sprites");
+    SPRITES("/sprites"),
+    PALETTES("/palettes"),
+    LAYERS("/layers");
 
     private final String value;
 

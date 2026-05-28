@@ -2,6 +2,7 @@ package spiffysprite.ui;
 
 import net.miginfocom.swing.MigLayout;
 import spiffysprite.ui.spritegrid.SpriteGrid;
+import spiffysprite.ui.spritespanel.SpritesPanel;
 import spiffysprite.ui.workspacepanel.WorkspacePanel;
 import spiffysprite.utils.ErrorUtils;
 
@@ -19,11 +20,13 @@ public class UIMaster extends JFrame {
         this.setResizable(true);
         this.setTitle("SpiffySprite");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        panelMaster = new JPanel(new MigLayout());
+        panelMaster = new JPanel(new MigLayout("", "[grow][]", ""));
         spriteGrid = new SpriteGrid();
+        scrollPaneSpriteGrid = new JScrollPane(spriteGrid);
         colourPicker = new ColourPicker();
         workspacePanel = new WorkspacePanel();
         scrollPaneColourPicker = new JScrollPane(colourPicker);
+        spritesPanel = new SpritesPanel();
 
         panelMaster.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
@@ -35,8 +38,9 @@ public class UIMaster extends JFrame {
         this.add(panelMaster);
 
         panelMaster.add(workspacePanel, "width 100%, dock north");
-        panelMaster.add(spriteGrid, "growprio 100");
-        panelMaster.add(scrollPaneColourPicker, "dock east");
+        panelMaster.add(scrollPaneSpriteGrid, "growprio 100, shrinkprio 100");
+        panelMaster.add(scrollPaneColourPicker, "shrinkprio 0, height 100%, dock east");
+        panelMaster.add(spritesPanel, "dock west");
     }
 
     private void finaliseComponents() {
@@ -58,6 +62,8 @@ public class UIMaster extends JFrame {
     protected static JScrollPane scrollPaneColourPicker;
     protected static JTabbedPane tabbedPaneSpriteGrid;
     protected static ColourPicker colourPicker;
+    protected static JScrollPane scrollPaneSpriteGrid;
     protected static SpriteGrid spriteGrid;
     protected static WorkspacePanel workspacePanel;
+    protected static SpritesPanel spritesPanel;
 }

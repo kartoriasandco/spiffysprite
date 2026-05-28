@@ -6,6 +6,9 @@ import spiffysprite.ui.TransparencyPanel;
 import javax.swing.*;
 
 public class SpriteListCell extends JPanel {
+    private JButton buttonLoad;
+    private JButton buttonDelete;
+    private JButton buttonRename;
     private JLabel labelName;
     private TransparencyPanel panelSpriteImage;
     private String name;
@@ -21,6 +24,10 @@ public class SpriteListCell extends JPanel {
     private void initComponents() {
         labelName = new JLabel(name);
         panelSpriteImage = new TransparencyPanel();
+
+        buttonLoad = new JButton("L");
+        buttonDelete = new JButton("D");
+        buttonRename = new JButton("R");
     }
 
     private void addComponents() {

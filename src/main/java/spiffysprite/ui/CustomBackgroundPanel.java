@@ -14,23 +14,16 @@ public class CustomBackgroundPanel extends JPanel {
     protected BufferedImage backgroundImage;
 
     public CustomBackgroundPanel() {
-        super();
         this.addComponentListener(new ComponentResizedListener());
     }
 
-    public CustomBackgroundPanel(MigLayout migLayout) {
-        super(migLayout);
-        this.migLayout = migLayout;
+    public CustomBackgroundPanel(BufferedImage backgroundImage) {
+        this.backgroundImage = backgroundImage;
         this.addComponentListener(new ComponentResizedListener());
     }
 
     protected void renderBackground(int widthPx, int heightPx) {
         backgroundImage = new BufferedImage(widthPx, heightPx, BufferedImage.TYPE_INT_RGB);
-        UIMaster.refreshGraphics();
-    }
-
-    protected void renderBackground(BufferedImage image) {
-        backgroundImage = image;
         UIMaster.refreshGraphics();
     }
 

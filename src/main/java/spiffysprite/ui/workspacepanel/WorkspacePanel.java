@@ -17,14 +17,14 @@ public class WorkspacePanel extends JPanel {
     private static JButton saveDataButton;
 
     public WorkspacePanel() {
-        super(new MigLayout("fillx", "[][][grow, fill]1px[150px, fill]", ""));
+        super(new MigLayout("fillx", "[][fill, grow]", ""));
         initComponents();
         addComponents();
     }
 
     private void initComponents() {
         panelButtons = new JPanel(new MigLayout());
-        panelTextFields = new JPanel(new MigLayout());
+        panelTextFields = new JPanel(new MigLayout("fillx", "[fill, grow]1px[150px, fill]", ""));
         filePathTextField = new JTextField();
         fileNameTextField = new JTextField();
         browseButton = new JButton("Browse for Workspace");

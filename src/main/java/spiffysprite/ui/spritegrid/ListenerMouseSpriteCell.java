@@ -8,15 +8,9 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class ListenerMouseSpriteCell extends MouseAdapter {
-    private final SpriteGrid spriteGrid;
-
-    public ListenerMouseSpriteCell(SpriteGrid spriteGrid) {
-        this.spriteGrid = spriteGrid;
-    }
-
     @Override
     public void mousePressed(MouseEvent me) {
-        spriteGrid.setMouseButtonPressed(true);
+        SpriteGrid.setMouseButtonPressed(true);
         EnhancedColour activeColour = ColourPicker.getActiveColour();
         TransparencyPanel spriteCell = (TransparencyPanel) me.getSource();
         spriteCell.setColour(activeColour);
@@ -26,13 +20,13 @@ public class ListenerMouseSpriteCell extends MouseAdapter {
 
     @Override
     public void mouseReleased(MouseEvent me) {
-        spriteGrid.setMouseButtonPressed(false);
+        SpriteGrid.setMouseButtonPressed(false);
         super.mouseReleased(me);
     }
 
     @Override
     public void mouseEntered(MouseEvent me) {
-        if (spriteGrid.isMouseButtonPressed()) {
+        if (SpriteGrid.isMouseButtonPressed()) {
             EnhancedColour activeColour = ColourPicker.getActiveColour();
             TransparencyPanel spriteCell = (TransparencyPanel) me.getSource();
             spriteCell.setColour(activeColour);

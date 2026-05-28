@@ -8,47 +8,18 @@ import spiffysprite.ui.workspacepanel.WorkspacePanel;
 import spiffysprite.utils.jsonparser.JSONObject;
 
 import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Objects;
 
 public abstract class FileUtils {
-    public static void savePalette(Palette palette) {
-
-    }
-
-    /**
-     * Creates a new .PNG file containing a lossless image of the specified sprite.
-     *
-     * @param sprite sprite to create an image of
-     * @param filePath path to save the .PNG file in
-     * @param fileName name of the .PNG file to create
-     */
-    public static void saveImage(Sprite sprite, String filePath, String fileName) throws IOException, NullPointerException {
-        File imageFile = new File(filePath, fileName);
-        if (doesFileExist(filePath, fileName)) {
-
-        } else {
-
-        }
-        ImageIO.write(sprite, "png", imageFile);
-    }
-
-    public static void saveJSON(JSONObject json, String filePath, String fileName) throws IOException,
-            IllegalArgumentException {
-
-        File dataFile = new File(filePath, fileName);
-        Path path = Paths.get(dataFile.getPath());
-        if (doesFileExist(filePath, fileName)) {
-
-        } else {
-            Files.createFile(path);
-        }
-    }
 
     /**
      * Returns whether a file exists with fileName in directory filePath.
@@ -68,6 +39,63 @@ public abstract class FileUtils {
             return files.length > 0;
         }
     }
+
+    public static void loadImage(File file) throws IllegalArgumentException {
+        String extension = getFileExtension(file);
+        if (!Objects.equals(extension, "png")) {
+            throw new IllegalArgumentException("file must be a .PNG");
+        }
+
+        try {
+            Sprite sprite = Sprite.fromBufferedImage(ImageIO.read(file));
+        } catch (IOException ioe) {
+            ErrorUtils.displayException(ioe);
+        }
+    }
+
+    /**
+     * Creates a new .PNG file containing a lossless image of the specified sprite.
+     *
+     * @param sprite sprite to create an image of
+     * @param filePath path to save the .PNG file to
+     * @param fileName name of the .PNG file to create
+     * @throws IOException if an error occurs during file creation or writing
+     * @throws NullPointerException if sprite is null
+     * @throws FileAlreadyExistsException if a file already exists in filePath named fileName
+     */
+    public static void saveImage(Sprite sprite, String filePath, String fileName) throws IOException,
+            NullPointerException {
+
+        File imageFile = new File(filePath, fileName);
+        if (doesFileExist(filePath, fileName)) {
+            throw new FileAlreadyExistsException(imageFile.getPath());
+        }
+
+        ImageIO.write(sprite, "png", imageFile);
+    }
+
+    /**
+     * Creates a new .JSON file containing a data representation of a sprite.
+     *
+     * @param json JSON representation of a sprite
+     * @param filePath path to save the .JSON file to
+     * @param fileName name of the .JSON file to create
+     * @throws IOException if an error occurs during file creation or writing
+     * @throws FileAlreadyExistsException if a file already exists in filePath named fileName
+     */
+    public static void saveJSON(JSONObject json, String filePath, String fileName) throws IOException {
+
+        File dataFile = new File(filePath, fileName);
+        Path path = Paths.get(dataFile.getPath());
+        if (doesFileExist(filePath, fileName)) {
+            throw new FileAlreadyExistsException(dataFile.getPath());
+        }
+
+        Files.createFile(path);
+        Files.writeString(path, json.toPrettyString());
+    }
+
+
 
     /**
      * Returns all files in the base workspace directory.
